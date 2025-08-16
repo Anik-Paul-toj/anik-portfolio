@@ -1,7 +1,7 @@
 .projects {
-  padding: 100px 0;
+  padding: 120px 0; /* Increased top padding */
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  min-height: 100vh;
+  min-height: 110vh; /* Increased from 100vh */
   width: 100%;
 }
 
@@ -32,22 +32,30 @@
 }
 
 .projects .section-header h2 {
-  font-size: 3.5rem;
+  font-size: 4rem; /* Increased from 3.5rem */
   font-weight: 800;
   color: #ffffff;
   margin-bottom: 2rem;
   line-height: 1.1;
   text-align: center;
+  background: linear-gradient(135deg, #ffffff 0%, #64c9ff 100%); /* Added gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 8px 32px rgba(0,0,0,0.3); /* Added shadow */
 }
 
 .projects .section-description {
-  font-size: 1.125rem;
-  color: #cbd5e1;
-  line-height: 1.7;
-  max-width: 600px;
+  font-size: 1.2rem; /* Slightly larger */
+  color: #e2e8f0; /* Brighter color */
+  line-height: 1.8; /* Increased line height */
+  max-width: 700px; /* Wider */
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  margin-bottom: 3rem; /* Added more space below */
+  font-weight: 400; /* Slightly bolder */
+  letter-spacing: 0.3px; /* Added letter spacing */
 }
 
 .filter-buttons {

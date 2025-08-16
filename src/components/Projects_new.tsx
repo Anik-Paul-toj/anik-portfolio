@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ExpandableCard } from './ui/ExpandableCard';
 import './styles/Projects.css';
 
 const Projects: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const projectsPerPage = 3;
   const projectCards = [
     {
       title: 'Trade Yogi',
@@ -147,24 +145,6 @@ const Projects: React.FC = () => {
     }
   ];
 
-  // Calculate pagination
-  const totalPages = Math.ceil(projectCards.length / projectsPerPage);
-  const startIndex = currentPage * projectsPerPage;
-  const endIndex = startIndex + projectsPerPage;
-  const currentProjects = projectCards.slice(startIndex, endIndex);
-
-  const nextPage = () => {
-    setCurrentPage((prev) => (prev + 1) % totalPages);
-  };
-
-  const prevPage = () => {
-    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
-  };
-
-  const goToPage = (page: number) => {
-    setCurrentPage(page);
-  };
-
   return (
     <section id="projects" className="projects">
       <div className="container">
@@ -191,102 +171,7 @@ const Projects: React.FC = () => {
           viewport={{ once: true }}
           style={{ marginTop: '3rem' }}
         >
-          <ExpandableCard cards={currentProjects} />
-        </motion.div>
-
-        {/* Pagination Controls */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '1rem',
-            marginTop: '3rem',
-            flexWrap: 'wrap'
-          }}
-        >
-          {/* Previous Button */}
-          <motion.button
-            onClick={prevPage}
-            disabled={totalPages <= 1}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              padding: '0.75rem 1.5rem',
-              backgroundColor: currentPage === 0 ? 'rgba(95, 95, 255, 0.3)' : '#5f5fff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '25px',
-              cursor: totalPages <= 1 ? 'not-allowed' : 'pointer',
-              fontWeight: '600',
-              fontSize: '0.9rem',
-              opacity: totalPages <= 1 ? 0.5 : 1
-            }}
-          >
-            ← Previous
-          </motion.button>
-
-          {/* Page Indicators */}
-          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <motion.button
-                key={index}
-                onClick={() => goToPage(index)}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                style={{
-                  width: '12px',
-                  height: '12px',
-                  borderRadius: '50%',
-                  border: 'none',
-                  backgroundColor: index === currentPage ? '#00ffff' : 'rgba(255, 255, 255, 0.3)',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease'
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Next Button */}
-          <motion.button
-            onClick={nextPage}
-            disabled={totalPages <= 1}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              padding: '0.75rem 1.5rem',
-              backgroundColor: currentPage === totalPages - 1 ? 'rgba(95, 95, 255, 0.3)' : '#5f5fff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '25px',
-              cursor: totalPages <= 1 ? 'not-allowed' : 'pointer',
-              fontWeight: '600',
-              fontSize: '0.9rem',
-              opacity: totalPages <= 1 ? 0.5 : 1
-            }}
-          >
-            Next →
-          </motion.button>
-        </motion.div>
-
-        {/* Page Info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
-          style={{
-            textAlign: 'center',
-            marginTop: '1.5rem',
-            color: '#cbd5e1',
-            fontSize: '0.9rem'
-          }}
-        >
-          Page {currentPage + 1} of {totalPages} • Showing {currentProjects.length} of {projectCards.length} projects
+          <ExpandableCard cards={projectCards} />
         </motion.div>
       </div>
     </section>
