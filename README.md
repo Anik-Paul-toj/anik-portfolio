@@ -113,7 +113,8 @@ npm run build
 ---
 
 ## 📧 Contact
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
+- **Email**: [trojanik003@gmail.com](mailto:trojanik003@gmail.com)
+- **Phone**: [+91 9126426769](tel:+919126426769)
 - **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
 - **GitHub**: [@Anik-Paul-toj](https://github.com/Anik-Paul-toj)
 

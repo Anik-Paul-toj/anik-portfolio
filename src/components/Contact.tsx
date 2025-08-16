@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 import GooeyButton from './GooeyButton';
 import './styles/Contact.css';
 
@@ -25,26 +26,44 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      alert('Thank you for your message! I will get back to you soon.');
+    try {
+      // EmailJS service (you'll need to set up EmailJS account and get these IDs)
+      // For now, using mailto as backup
+      const subject = encodeURIComponent(formData.subject || 'Contact from Portfolio');
+      const body = encodeURIComponent(
+        `Hi Anik,\n\n` +
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n\n` +
+        `Message:\n${formData.message}\n\n` +
+        `Best regards,\n${formData.name}`
+      );
+      
+      const mailtoLink = `mailto:trojanik003@gmail.com?subject=${subject}&body=${body}`;
+      window.open(mailtoLink, '_blank');
+      
+      // Show success message
+      alert('Email client opened! Your message is ready to send to trojanik003@gmail.com');
       setFormData({ name: '', email: '', subject: '', message: '' });
+      
+    } catch (error) {
+      alert('Something went wrong. Please try sending an email directly to trojanik003@gmail.com');
+    } finally {
       setIsSubmitting(false);
-    }, 2000);
+    }
   };
 
   const contactInfo = [
     {
       icon: FaEnvelope,
       title: 'Email',
-      value: 'your.email@example.com',
-      link: 'mailto:your.email@example.com'
+      value: 'trojanik003@gmail.com',
+      link: 'mailto:trojanik003@gmail.com'
     },
     {
       icon: FaPhone,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      value: '+91 9126426769',
+      link: 'tel:+919126426769'
     },
     {
       icon: FaMapMarkerAlt,
