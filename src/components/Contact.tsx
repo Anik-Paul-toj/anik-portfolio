@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG } from '../config/emailjs';
 import GooeyButton from './GooeyButton';
 import './styles/Contact.css';
 
@@ -27,8 +28,36 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // EmailJS service (you'll need to set up EmailJS account and get these IDs)
-      // For now, using mailto as backup
+      // Initialize EmailJS with your public key
+      emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+      
+      // Prepare template parameters matching your EmailJS template
+      const templateParams = {
+        user_name: formData.name,
+        user_email: formData.email,
+        user_subject: formData.subject || 'Contact from Portfolio',
+        user_message: formData.message,
+        to_email: 'trojanik003@gmail.com' // Your email
+      };
+      
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        templateParams
+      );
+      
+      if (result.status === 200) {
+        alert('✅ Message sent successfully! I will get back to you soon.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error('Email sending failed');
+      }
+      
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      
+      // Fallback to mailto if EmailJS fails
       const subject = encodeURIComponent(formData.subject || 'Contact from Portfolio');
       const body = encodeURIComponent(
         `Hi Anik,\n\n` +
@@ -40,13 +69,9 @@ const Contact: React.FC = () => {
       
       const mailtoLink = `mailto:trojanik003@gmail.com?subject=${subject}&body=${body}`;
       window.open(mailtoLink, '_blank');
-      
-      // Show success message
-      alert('Email client opened! Your message is ready to send to trojanik003@gmail.com');
+      alert('📧 Email client opened as backup! Your message is ready to send.');
       setFormData({ name: '', email: '', subject: '', message: '' });
       
-    } catch (error) {
-      alert('Something went wrong. Please try sending an email directly to trojanik003@gmail.com');
     } finally {
       setIsSubmitting(false);
     }
