@@ -49,7 +49,8 @@ const About: React.FC = () => {
         'Consistently maintained excellent academic performance, achieving 90.1% in Class 10 Board Examinations.'
       ],
       icon: FaSchool,
-      color: '#FF6B6B'
+      color: '#FF6B6B',
+      phase: 'PHASE ONE'
     },
     {
       title: 'Higher Secondary',
@@ -63,7 +64,8 @@ const About: React.FC = () => {
         'Participated in various coding competitions and science fairs.'
       ],
       icon: FaGraduationCap,
-      color: '#4ECDC4'
+      color: '#4ECDC4',
+      phase: 'PHASE TWO'
     },
     {
       title: 'Computer Science Engineering',
@@ -77,7 +79,8 @@ const About: React.FC = () => {
         'Working on various software development projects.'
       ],
       icon: FaUniversity,
-      color: '#45B7D1'
+      color: '#45B7D1',
+      phase: 'PHASE THREE'
     }
   ];
 
@@ -235,246 +238,290 @@ const About: React.FC = () => {
             style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
           >
             <div className="experience-section">
-              <h3 style={{textAlign: 'center', marginBottom: 0, letterSpacing: 1, color: '#b3b3ff', fontSize: '0.8rem'}}>WHAT I HAVE DONE SO FAR</h3>
-              <h2 style={{textAlign: 'center', fontWeight: 700, fontSize: '1.8rem', margin: '0 0 1.5rem 0', color: '#fff', textShadow: '0 4px 32px #000'}}>Scholastic Record</h2>
-              
-              {/* Marvel-inspired Timeline */}
-              <div className="marvel-timeline" style={{
+              {/* Marvel Phase Timeline */}
+              <div style={{
                 position: 'relative',
-                maxWidth: '1200px',
-                margin: '0 auto',
                 padding: '2rem 0',
-                overflow: 'hidden'
+                maxWidth: '1400px',
+                margin: '0 auto'
               }}>
-                {/* Timeline line */}
-                <div style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '0',
-                  right: '0',
-                  height: '3px',
-                  background: 'linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4)',
-                  transform: 'translateY(-50%)',
-                  zIndex: 1,
-                  borderRadius: '2px',
-                  boxShadow: '0 0 20px rgba(255, 107, 107, 0.3)'
-                }} />
-                
-                {/* Timeline items */}
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  position: 'relative',
-                  zIndex: 2,
-                  padding: '0 1rem'
-                }}>
-                  {experiences.map((exp, index) => (
+                {/* Header */}
+                <motion.div
+                  initial={{ opacity: 0, y: -30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  style={{ textAlign: 'center', marginBottom: '4rem' }}
+                >
+                  <h3 style={{ 
+                    color: '#64748b', 
+                    fontSize: '0.9rem', 
+                    letterSpacing: '2px', 
+                    marginBottom: '0.5rem',
+                    fontWeight: '500'
+                  }}>
+                    WHAT I HAVE DONE SO FAR
+                  </h3>
+                  <h1 style={{ 
+                    color: '#fff', 
+                    fontSize: '3rem', 
+                    fontWeight: '700', 
+                    margin: 0,
+                    textShadow: '0 4px 20px rgba(0,0,0,0.5)'
+                  }}>
+                    Scholastic Record
+                  </h1>
+                </motion.div>
+
+                {/* Phase Sections */}
+                {experiences.map((exp, phaseIndex) => (
+                  <motion.div
+                    key={phaseIndex}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: phaseIndex * 0.3 }}
+                    viewport={{ once: true }}
+                    style={{ marginBottom: '4rem' }}
+                  >
+                    {/* Phase Header */}
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginBottom: '2rem',
+                      position: 'relative'
+                    }}>
+                      <div style={{
+                        flex: 1,
+                        height: '2px',
+                        background: `linear-gradient(90deg, transparent 0%, ${exp.color} 50%, transparent 100%)`,
+                        marginRight: '2rem'
+                      }} />
+                      <h2 style={{
+                        color: exp.color,
+                        fontSize: '1.2rem',
+                        fontWeight: '700',
+                        letterSpacing: '3px',
+                        textShadow: `0 0 20px ${exp.color}80`,
+                        padding: '0.5rem 2rem',
+                        background: `linear-gradient(90deg, transparent 0%, ${exp.color}20 50%, transparent 100%)`,
+                        borderRadius: '2rem',
+                        margin: 0,
+                        whiteSpace: 'nowrap'
+                      }}>
+                        {exp.phase}
+                      </h2>
+                      <div style={{
+                        flex: 1,
+                        height: '2px',
+                        background: `linear-gradient(90deg, transparent 0%, ${exp.color} 50%, transparent 100%)`,
+                        marginLeft: '2rem'
+                      }} />
+                    </div>
+
+                    {/* Academic Card */}
                     <motion.div
-                      key={index}
-                      className="timeline-item"
-                      initial={{ 
-                        opacity: 0, 
-                        y: 100,
-                        scale: 0.8
+                      whileHover={{ 
+                        scale: 1.02,
+                        boxShadow: `0 20px 40px ${exp.color}30`,
                       }}
-                      whileInView={{ 
-                        opacity: 1, 
-                        y: 0,
-                        scale: 1
-                      }}
-                      whileHover={{
-                        scale: 1.1,
-                        y: -20,
-                        transition: { duration: 0.3, ease: "easeOut" }
-                      }}
-                      transition={{ 
-                        duration: 1.2, 
-                        delay: 0.1 + index * 0.2,
-                        type: "spring",
-                        damping: 15,
-                        stiffness: 100
-                      }}
-                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.3 }}
                       style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
+                        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%)',
+                        border: `2px solid ${exp.color}40`,
+                        borderRadius: '1.5rem',
+                        padding: '2rem',
                         position: 'relative',
-                        cursor: 'pointer',
-                        minWidth: '200px'
+                        overflow: 'hidden',
+                        backdropFilter: 'blur(20px)',
+                        boxShadow: `0 10px 30px ${exp.color}20`,
+                        cursor: 'pointer'
                       }}
                     >
-                      {/* Timeline dot */}
+                      {/* Animated background gradient */}
                       <motion.div
-                        whileHover={{ scale: 1.3 }}
-                        style={{
-                          width: '60px',
-                          height: '60px',
-                          borderRadius: '50%',
-                          background: exp.color,
-                          border: '4px solid #fff',
-                          boxShadow: `0 0 30px ${exp.color}80`,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          marginBottom: '1rem',
-                          zIndex: 3,
-                          position: 'relative'
+                        animate={{
+                          background: [
+                            `linear-gradient(45deg, ${exp.color}10 0%, transparent 100%)`,
+                            `linear-gradient(45deg, transparent 0%, ${exp.color}10 100%)`,
+                            `linear-gradient(45deg, ${exp.color}10 0%, transparent 100%)`
+                          ]
                         }}
-                      >
-                        {React.createElement(exp.icon as any, { 
-                          style: { 
-                            color: '#fff', 
-                            fontSize: '1.5rem',
-                            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
-                          } 
-                        })}
-                      </motion.div>
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          borderRadius: '1.5rem'
+                        }}
+                      />
 
-                      {/* Content card */}
-                      <motion.div 
-                        className="timeline-content"
-                        whileHover={{
-                          boxShadow: `0 20px 50px ${exp.color}40`,
-                          borderColor: exp.color,
-                          transition: { duration: 0.3 }
-                        }}
-                        style={{
-                          background: 'rgba(15, 23, 42, 0.95)',
-                          padding: '1.5rem',
-                          borderRadius: '1rem',
-                          border: `2px solid ${exp.color}40`,
-                          boxShadow: `0 8px 25px ${exp.color}20`,
-                          backdropFilter: 'blur(15px)',
-                          textAlign: 'center',
-                          position: 'relative',
-                          overflow: 'hidden',
-                          minWidth: '200px',
-                          maxWidth: '250px'
-                        }}
-                      >
-                        {/* Animated background gradient */}
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          whileHover={{ opacity: 1 }}
-                          transition={{ duration: 0.3 }}
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            background: `linear-gradient(135deg, ${exp.color}10 0%, transparent 100%)`,
-                            borderRadius: '1rem',
-                            zIndex: 0
-                          }}
-                        />
-                        
-                        <div style={{ position: 'relative', zIndex: 1 }}>
-                          <motion.h4 
-                            whileHover={{ color: exp.color }}
-                            style={{ 
-                              color: exp.color, 
-                              marginBottom: '0.5rem', 
-                              fontSize: '1.1rem', 
-                              fontWeight: '700',
-                              textShadow: `0 2px 8px ${exp.color}40`
+                      <div style={{ position: 'relative', zIndex: 2 }}>
+                        <div style={{ 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          gap: '2rem',
+                          flexWrap: 'wrap'
+                        }}>
+                          {/* Icon */}
+                          <motion.div
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            style={{
+                              width: '100px',
+                              height: '100px',
+                              borderRadius: '50%',
+                              background: `linear-gradient(135deg, ${exp.color} 0%, ${exp.color}80 100%)`,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              boxShadow: `0 10px 25px ${exp.color}40`,
+                              flexShrink: 0
                             }}
                           >
-                            {exp.title}
-                          </motion.h4>
-                          <motion.h5 
-                            whileHover={{ color: '#8f8fff' }}
-                            style={{ 
-                              color: '#5f5fff', 
-                              marginBottom: '0.6rem', 
-                              fontSize: '0.9rem',
-                              fontWeight: '600'
-                            }}
-                          >
-                            {exp.company}
-                          </motion.h5>
-                          <motion.span 
-                            className="period"
-                            whileHover={{ scale: 1.05 }}
-                            style={{ 
-                              background: `${exp.color}30`, 
-                              padding: '0.4rem 1rem', 
-                              borderRadius: '2rem',
-                              fontSize: '0.8rem',
-                              color: '#fff',
-                              display: 'inline-block',
-                              fontWeight: '600',
-                              marginBottom: '0.8rem',
-                              border: `1px solid ${exp.color}60`
-                            }}
-                          >
-                            {exp.period}
-                          </motion.span>
-                          <p style={{ 
-                            color: '#ddd', 
-                            lineHeight: '1.4', 
-                            fontSize: '0.85rem', 
-                            marginBottom: '0.8rem',
-                            textAlign: 'left'
-                          }}>
-                            {exp.description}
-                          </p>
-                          {exp.achievements && (
-                            <ul style={{ 
-                              color: '#ccc', 
-                              lineHeight: '1.3', 
-                              paddingLeft: '0', 
-                              listStyle: 'none', 
-                              margin: 0,
-                              textAlign: 'left'
+                            {React.createElement(exp.icon as any, { 
+                              style: { 
+                                fontSize: '2.5rem', 
+                                color: '#fff',
+                                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+                              } 
+                            })}
+                          </motion.div>
+
+                          {/* Content */}
+                          <div style={{ flex: 1, minWidth: '300px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                              <h3 style={{ 
+                                color: exp.color, 
+                                fontSize: '1.8rem', 
+                                fontWeight: '700', 
+                                margin: 0,
+                                textShadow: `0 2px 10px ${exp.color}40`
+                              }}>
+                                {exp.title}
+                              </h3>
+                              <span style={{
+                                background: `${exp.color}30`,
+                                color: '#fff',
+                                padding: '0.4rem 1.2rem',
+                                borderRadius: '2rem',
+                                fontSize: '0.9rem',
+                                fontWeight: '600',
+                                border: `1px solid ${exp.color}60`
+                              }}>
+                                {exp.period}
+                              </span>
+                            </div>
+
+                            <h4 style={{ 
+                              color: '#94a3b8', 
+                              fontSize: '1.2rem', 
+                              fontWeight: '500', 
+                              marginBottom: '1rem',
+                              margin: '0 0 1rem 0'
                             }}>
-                              {exp.achievements.slice(0, 2).map((achievement, i) => (
-                                <li key={i} style={{ 
-                                  marginBottom: '0.4rem', 
-                                  position: 'relative', 
-                                  fontSize: '0.8rem',
-                                  paddingLeft: '1rem'
-                                }}>
-                                  <span style={{
-                                    position: 'absolute',
-                                    left: 0,
-                                    top: '0.3rem',
-                                    width: '4px',
-                                    height: '4px',
-                                    borderRadius: '50%',
-                                    background: exp.color
-                                  }}></span>
-                                  {achievement}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                      </motion.div>
+                              {exp.company}
+                            </h4>
 
-                      {/* Year label */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
-                        style={{
-                          marginTop: '1rem',
-                          padding: '0.5rem 1rem',
-                          background: exp.color,
-                          borderRadius: '1rem',
-                          color: '#fff',
-                          fontSize: '0.9rem',
-                          fontWeight: '700',
-                          boxShadow: `0 4px 15px ${exp.color}40`
-                        }}
-                      >
-                        {exp.year}
-                      </motion.div>
+                            <p style={{ 
+                              color: '#e2e8f0', 
+                              fontSize: '1rem', 
+                              lineHeight: '1.6', 
+                              marginBottom: '1.5rem' 
+                            }}>
+                              {exp.description}
+                            </p>
+
+                            {/* Achievements */}
+                            <div style={{ marginTop: '1.5rem' }}>
+                              <h5 style={{ 
+                                color: exp.color, 
+                                fontSize: '1.1rem', 
+                                fontWeight: '600', 
+                                marginBottom: '1rem' 
+                              }}>
+                                Key Achievements:
+                              </h5>
+                              <div style={{ display: 'grid', gap: '0.8rem' }}>
+                                {exp.achievements.map((achievement, i) => (
+                                  <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    viewport={{ once: true }}
+                                    style={{
+                                      display: 'flex',
+                                      alignItems: 'flex-start',
+                                      gap: '0.8rem'
+                                    }}
+                                  >
+                                    <div style={{
+                                      width: '6px',
+                                      height: '6px',
+                                      borderRadius: '50%',
+                                      background: exp.color,
+                                      marginTop: '0.5rem',
+                                      flexShrink: 0,
+                                      boxShadow: `0 0 8px ${exp.color}60`
+                                    }} />
+                                    <span style={{ 
+                                      color: '#cbd5e1', 
+                                      fontSize: '0.95rem', 
+                                      lineHeight: '1.5' 
+                                    }}>
+                                      {achievement}
+                                    </span>
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Year Badge */}
+                          <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            style={{
+                              background: `linear-gradient(135deg, ${exp.color} 0%, ${exp.color}80 100%)`,
+                              color: '#fff',
+                              padding: '1rem 1.5rem',
+                              borderRadius: '1rem',
+                              fontSize: '1.5rem',
+                              fontWeight: '700',
+                              textAlign: 'center',
+                              boxShadow: `0 8px 20px ${exp.color}40`,
+                              minWidth: '80px'
+                            }}
+                          >
+                            {exp.year}
+                          </motion.div>
+                        </div>
+                      </div>
                     </motion.div>
-                  ))}
-                </div>
+                  </motion.div>
+                ))}
+
+                {/* Footer */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  viewport={{ once: true }}
+                  style={{ textAlign: 'center', marginTop: '4rem' }}
+                >
+                  <div style={{
+                    height: '2px',
+                    background: 'linear-gradient(90deg, transparent 0%, #5f5fff 20%, #00bcd4 50%, #5f5fff 80%, transparent 100%)',
+                    margin: '2rem 0',
+                    borderRadius: '1px'
+                  }} />
+                  <p style={{ 
+                    color: '#64748b', 
+                    fontSize: '0.9rem', 
+                    fontStyle: 'italic' 
+                  }}>
+                    The journey continues...
+                  </p>
+                </motion.div>
               </div>
             </div>
 
