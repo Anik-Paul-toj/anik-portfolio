@@ -93,14 +93,14 @@ const Contact: React.FC = () => {
     {
       icon: FaMapMarkerAlt,
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Kolkata, West Bengal, India',
       link: '#'
     }
   ];
 
   const socialLinks = [
-    { icon: FaGithub, url: 'https://github.com/yourusername', label: 'GitHub' },
-    { icon: FaLinkedin, url: 'https://linkedin.com/in/yourusername', label: 'LinkedIn' },
+    { icon: FaGithub, url: 'https://github.com/Anik-Paul-toj', label: 'GitHub' },
+    { icon: FaLinkedin, url: 'https://www.linkedin.com/in/anik-paul-2bb315265/', label: 'LinkedIn' },
     { icon: FaTwitter, url: 'https://twitter.com/yourusername', label: 'Twitter' }
   ];
 

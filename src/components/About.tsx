@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaDownload } from 'react-icons/fa';
+import { FaDownload, FaMapMarkerAlt } from 'react-icons/fa';
 import './styles/About.css';
 
 const TECH_ICON_MAP: Record<string, string> = {
@@ -147,6 +147,19 @@ const About: React.FC = () => {
             viewport={{ once: true }}
           >
             <h3 style={{ fontSize: '1.5rem', marginBottom: '0.8rem' }}>Who I Am</h3>
+            
+            {/* Location information */}
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              marginBottom: '1rem',
+              color: '#00bcd4',
+              fontSize: '0.95rem'
+            }}>
+              {React.createElement(FaMapMarkerAlt as any, { style: { marginRight: '0.5rem' } })}
+              <span>Kolkata, West Bengal, India</span>
+            </div>
+            
             <p style={{ fontSize: '0.95rem', lineHeight: '1.5', marginBottom: '0.8rem' }}>
               I'm a passionate Full Stack Developer with over 5 years of experience 
               creating digital solutions that make a difference. I love turning complex 
