@@ -1,0 +1,24 @@
+.scroll-to-top:hover {
+  box-shadow: 0 6px 20px rgba(0, 188, 212, 0.6);
+}
+
+.scroll-to-top:focus {
+  outline: none;
+}
+
+.scroll-to-top svg {
+  font-size: 1.2rem;
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}

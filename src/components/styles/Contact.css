@@ -144,6 +144,13 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   background: #f8f9fa;
+  color: #000000;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #6c757d;
+  opacity: 0.8;
 }
 
 .form-group input:focus,
@@ -223,4 +230,4 @@
   .social-icons {
     flex-wrap: wrap;
   }
-} 
+}
