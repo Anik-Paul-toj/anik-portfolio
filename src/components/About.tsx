@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaDownload, FaMapMarkerAlt, FaGraduationCap, FaSchool, FaUniversity } from 'react-icons/fa';
+import { FaDownload, FaMapMarkerAlt, FaGraduationCap, FaSchool, FaUniversity, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import './styles/About.css';
 
 const TECH_ICON_MAP: Record<string, string> = {
@@ -32,6 +32,9 @@ const TECHNOLOGIES = [
 ];
 
 const About: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 1; // Show one experience at a time for better focus
+  
   const technologies = TECHNOLOGIES;
   const loadingTech = false;
   const errorTech = null;
@@ -83,6 +86,38 @@ const About: React.FC = () => {
       phase: 'PHASE THREE'
     }
   ];
+
+  const totalPages = Math.ceil(experiences.length / itemsPerPage);
+  const currentExperiences = experiences.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
+  const nextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        prevPage();
+      } else if (event.key === 'ArrowRight') {
+        nextPage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <section id="about" className="about" style={{ 
@@ -241,8 +276,8 @@ const About: React.FC = () => {
               {/* Marvel Phase Timeline */}
               <div style={{
                 position: 'relative',
-                padding: '2rem 0',
-                maxWidth: '1400px',
+                padding: '1.5rem 0',
+                maxWidth: '1200px',
                 margin: '0 auto'
               }}>
                 {/* Header */}
@@ -250,58 +285,189 @@ const About: React.FC = () => {
                   initial={{ opacity: 0, y: -30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
-                  style={{ textAlign: 'center', marginBottom: '4rem' }}
+                  style={{ textAlign: 'center', marginBottom: '2.5rem' }}
                 >
                   <h3 style={{ 
                     color: '#64748b', 
-                    fontSize: '0.9rem', 
-                    letterSpacing: '2px', 
-                    marginBottom: '0.5rem',
+                    fontSize: '0.70rem', 
+                    letterSpacing: '1.5px', 
+                    marginBottom: '0.3rem',
                     fontWeight: '500'
                   }}>
                     WHAT I HAVE DONE SO FAR
                   </h3>
                   <h1 style={{ 
                     color: '#fff', 
-                    fontSize: '3rem', 
+                    fontSize: '2rem', 
                     fontWeight: '700', 
                     margin: 0,
                     textShadow: '0 4px 20px rgba(0,0,0,0.5)'
                   }}>
                     Scholastic Record
                   </h1>
+                  
+                  {/* Pagination Indicator */}
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '0.8rem',
+                    marginTop: '1.5rem'
+                  }}>
+                    <span style={{
+                      color: '#64748b',
+                      fontSize: '0.8rem',
+                      fontWeight: '500'
+                    }}>
+                      {currentPage + 1} of {totalPages}
+                    </span>
+                    <div style={{
+                      display: 'flex',
+                      gap: '0.4rem'
+                    }}>
+                      {Array.from({ length: totalPages }, (_, index) => (
+                        <motion.button
+                          key={index}
+                          onClick={() => goToPage(index)}
+                          whileHover={{ scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                          style={{
+                            width: '8px',
+                            height: '8px',
+                            borderRadius: '50%',
+                            border: 'none',
+                            background: index === currentPage 
+                              ? 'linear-gradient(135deg, #5f5fff 0%, #00bcd4 100%)'
+                              : 'rgba(100, 116, 139, 0.5)',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            boxShadow: index === currentPage 
+                              ? '0 0 10px rgba(95, 95, 255, 0.6)'
+                              : 'none'
+                          }}
+                          aria-label={`Go to page ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </motion.div>
 
-                {/* Phase Sections */}
-                {experiences.map((exp, phaseIndex) => (
-                  <motion.div
-                    key={phaseIndex}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: phaseIndex * 0.3 }}
-                    viewport={{ once: true }}
-                    style={{ marginBottom: '4rem' }}
+                {/* Navigation Controls */}
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '1.5rem',
+                  position: 'relative'
+                }}>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={prevPage}
+                    disabled={totalPages <= 1}
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(95, 95, 255, 0.2) 0%, rgba(0, 188, 212, 0.2) 100%)',
+                      border: '2px solid rgba(95, 95, 255, 0.3)',
+                      borderRadius: '50%',
+                      width: '40px',
+                      height: '40px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: totalPages <= 1 ? 'not-allowed' : 'pointer',
+                      color: totalPages <= 1 ? '#64748b' : '#fff',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.3s ease',
+                      opacity: totalPages <= 1 ? 0.5 : 1
+                    }}
+                    aria-label="Previous page"
+                    title="Previous (← Arrow Key)"
                   >
+                    {React.createElement(FaChevronLeft as any, { size: 14 })}
+                  </motion.button>
+
+                  <div style={{
+                    flex: 1,
+                    height: '2px',
+                    background: 'linear-gradient(90deg, transparent 0%, #5f5fff 20%, #00bcd4 50%, #5f5fff 80%, transparent 100%)',
+                    margin: '0 1.5rem',
+                    position: 'relative',
+                    borderRadius: '1px'
+                  }}>
+                    {/* Progress indicator */}
+                    <motion.div
+                      initial={{ width: '0%' }}
+                      animate={{ 
+                        width: `${((currentPage + 1) / totalPages) * 100}%`,
+                        background: 'linear-gradient(90deg, #5f5fff 0%, #00bcd4 100%)'
+                      }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      style={{
+                        height: '100%',
+                        borderRadius: '1px',
+                        boxShadow: '0 0 8px rgba(95, 95, 255, 0.6)'
+                      }}
+                    />
+                  </div>
+
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={nextPage}
+                    disabled={totalPages <= 1}
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(95, 95, 255, 0.2) 0%, rgba(0, 188, 212, 0.2) 100%)',
+                      border: '2px solid rgba(95, 95, 255, 0.3)',
+                      borderRadius: '50%',
+                      width: '40px',
+                      height: '40px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: totalPages <= 1 ? 'not-allowed' : 'pointer',
+                      color: totalPages <= 1 ? '#64748b' : '#fff',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.3s ease',
+                      opacity: totalPages <= 1 ? 0.5 : 1
+                    }}
+                    aria-label="Next page"
+                    title="Next (→ Arrow Key)"
+                  >
+                    {React.createElement(FaChevronRight as any, { size: 14 })}
+                  </motion.button>
+                </div>
+
+                {/* Phase Sections */}
+                <div style={{ minHeight: '450px', position: 'relative' }}>
+                  {currentExperiences.map((exp, phaseIndex) => (
+                    <motion.div
+                      key={`${currentPage}-${phaseIndex}`}
+                      initial={{ opacity: 0, x: 100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -100 }}
+                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                      style={{ marginBottom: '3rem' }}
+                    >
                     {/* Phase Header */}
                     <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      marginBottom: '2rem',
+                      marginBottom: '1.5rem',
                       position: 'relative'
                     }}>
                       <div style={{
                         flex: 1,
                         height: '2px',
                         background: `linear-gradient(90deg, transparent 0%, ${exp.color} 50%, transparent 100%)`,
-                        marginRight: '2rem'
+                        marginRight: '1.5rem'
                       }} />
                       <h2 style={{
                         color: exp.color,
-                        fontSize: '1.2rem',
+                        fontSize: '1rem',
                         fontWeight: '700',
-                        letterSpacing: '3px',
+                        letterSpacing: '2px',
                         textShadow: `0 0 20px ${exp.color}80`,
-                        padding: '0.5rem 2rem',
+                        padding: '0.4rem 1.5rem',
                         background: `linear-gradient(90deg, transparent 0%, ${exp.color}20 50%, transparent 100%)`,
                         borderRadius: '2rem',
                         margin: 0,
@@ -313,7 +479,7 @@ const About: React.FC = () => {
                         flex: 1,
                         height: '2px',
                         background: `linear-gradient(90deg, transparent 0%, ${exp.color} 50%, transparent 100%)`,
-                        marginLeft: '2rem'
+                        marginLeft: '1.5rem'
                       }} />
                     </div>
 
@@ -327,12 +493,12 @@ const About: React.FC = () => {
                       style={{
                         background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%)',
                         border: `2px solid ${exp.color}40`,
-                        borderRadius: '1.5rem',
-                        padding: '2rem',
+                        borderRadius: '1.2rem',
+                        padding: '1.5rem',
                         position: 'relative',
                         overflow: 'hidden',
                         backdropFilter: 'blur(20px)',
-                        boxShadow: `0 10px 30px ${exp.color}20`,
+                        boxShadow: `0 8px 25px ${exp.color}20`,
                         cursor: 'pointer'
                       }}
                     >
@@ -352,7 +518,7 @@ const About: React.FC = () => {
                           left: 0,
                           right: 0,
                           bottom: 0,
-                          borderRadius: '1.5rem'
+                          borderRadius: '1.2rem'
                         }}
                       />
 
@@ -360,27 +526,27 @@ const About: React.FC = () => {
                         <div style={{ 
                           display: 'flex', 
                           alignItems: 'center', 
-                          gap: '2rem',
+                          gap: '1.5rem',
                           flexWrap: 'wrap'
                         }}>
                           {/* Icon */}
                           <motion.div
                             whileHover={{ scale: 1.1, rotate: 5 }}
                             style={{
-                              width: '100px',
-                              height: '100px',
+                              width: '70px',
+                              height: '70px',
                               borderRadius: '50%',
                               background: `linear-gradient(135deg, ${exp.color} 0%, ${exp.color}80 100%)`,
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              boxShadow: `0 10px 25px ${exp.color}40`,
+                              boxShadow: `0 8px 20px ${exp.color}40`,
                               flexShrink: 0
                             }}
                           >
                             {React.createElement(exp.icon as any, { 
                               style: { 
-                                fontSize: '2.5rem', 
+                                fontSize: '2rem', 
                                 color: '#fff',
                                 filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
                               } 
@@ -388,11 +554,11 @@ const About: React.FC = () => {
                           </motion.div>
 
                           {/* Content */}
-                          <div style={{ flex: 1, minWidth: '300px' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                          <div style={{ flex: 1, minWidth: '250px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.8rem' }}>
                               <h3 style={{ 
                                 color: exp.color, 
-                                fontSize: '1.8rem', 
+                                fontSize: '1.4rem', 
                                 fontWeight: '700', 
                                 margin: 0,
                                 textShadow: `0 2px 10px ${exp.color}40`
@@ -402,9 +568,9 @@ const About: React.FC = () => {
                               <span style={{
                                 background: `${exp.color}30`,
                                 color: '#fff',
-                                padding: '0.4rem 1.2rem',
-                                borderRadius: '2rem',
-                                fontSize: '0.9rem',
+                                padding: '0.3rem 1rem',
+                                borderRadius: '1.5rem',
+                                fontSize: '0.8rem',
                                 fontWeight: '600',
                                 border: `1px solid ${exp.color}60`
                               }}>
@@ -414,34 +580,34 @@ const About: React.FC = () => {
 
                             <h4 style={{ 
                               color: '#94a3b8', 
-                              fontSize: '1.2rem', 
+                              fontSize: '1rem', 
                               fontWeight: '500', 
-                              marginBottom: '1rem',
-                              margin: '0 0 1rem 0'
+                              marginBottom: '0.8rem',
+                              margin: '0 0 0.8rem 0'
                             }}>
                               {exp.company}
                             </h4>
 
                             <p style={{ 
                               color: '#e2e8f0', 
-                              fontSize: '1rem', 
-                              lineHeight: '1.6', 
-                              marginBottom: '1.5rem' 
+                              fontSize: '0.9rem', 
+                              lineHeight: '1.5', 
+                              marginBottom: '1.2rem' 
                             }}>
                               {exp.description}
                             </p>
 
                             {/* Achievements */}
-                            <div style={{ marginTop: '1.5rem' }}>
+                            <div style={{ marginTop: '1.2rem' }}>
                               <h5 style={{ 
                                 color: exp.color, 
-                                fontSize: '1.1rem', 
+                                fontSize: '1rem', 
                                 fontWeight: '600', 
-                                marginBottom: '1rem' 
+                                marginBottom: '0.8rem' 
                               }}>
                                 Key Achievements:
                               </h5>
-                              <div style={{ display: 'grid', gap: '0.8rem' }}>
+                              <div style={{ display: 'grid', gap: '0.6rem' }}>
                                 {exp.achievements.map((achievement, i) => (
                                   <motion.div
                                     key={i}
@@ -452,22 +618,22 @@ const About: React.FC = () => {
                                     style={{
                                       display: 'flex',
                                       alignItems: 'flex-start',
-                                      gap: '0.8rem'
+                                      gap: '0.6rem'
                                     }}
                                   >
                                     <div style={{
-                                      width: '6px',
-                                      height: '6px',
+                                      width: '5px',
+                                      height: '5px',
                                       borderRadius: '50%',
                                       background: exp.color,
-                                      marginTop: '0.5rem',
+                                      marginTop: '0.4rem',
                                       flexShrink: 0,
-                                      boxShadow: `0 0 8px ${exp.color}60`
+                                      boxShadow: `0 0 6px ${exp.color}60`
                                     }} />
                                     <span style={{ 
                                       color: '#cbd5e1', 
-                                      fontSize: '0.95rem', 
-                                      lineHeight: '1.5' 
+                                      fontSize: '0.85rem', 
+                                      lineHeight: '1.4' 
                                     }}>
                                       {achievement}
                                     </span>
@@ -483,13 +649,13 @@ const About: React.FC = () => {
                             style={{
                               background: `linear-gradient(135deg, ${exp.color} 0%, ${exp.color}80 100%)`,
                               color: '#fff',
-                              padding: '1rem 1.5rem',
-                              borderRadius: '1rem',
-                              fontSize: '1.5rem',
+                              padding: '0.8rem 1.2rem',
+                              borderRadius: '0.8rem',
+                              fontSize: '1.2rem',
                               fontWeight: '700',
                               textAlign: 'center',
-                              boxShadow: `0 8px 20px ${exp.color}40`,
-                              minWidth: '80px'
+                              boxShadow: `0 6px 16px ${exp.color}40`,
+                              minWidth: '70px'
                             }}
                           >
                             {exp.year}
@@ -499,6 +665,7 @@ const About: React.FC = () => {
                     </motion.div>
                   </motion.div>
                 ))}
+                </div>
 
                 {/* Footer */}
                 <motion.div
@@ -506,21 +673,32 @@ const About: React.FC = () => {
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 1, delay: 0.5 }}
                   viewport={{ once: true }}
-                  style={{ textAlign: 'center', marginTop: '4rem' }}
+                  style={{ textAlign: 'center', marginTop: '0.1rem' }}
                 >
                   <div style={{
                     height: '2px',
                     background: 'linear-gradient(90deg, transparent 0%, #5f5fff 20%, #00bcd4 50%, #5f5fff 80%, transparent 100%)',
-                    margin: '2rem 0',
+                    margin: '0.2rem 0 0.1rem 0',
                     borderRadius: '1px'
                   }} />
                   <p style={{ 
                     color: '#64748b', 
-                    fontSize: '0.9rem', 
-                    fontStyle: 'italic' 
+                    fontSize: '0.8rem', 
+                    fontStyle: 'italic',
+                    marginBottom: '0.05rem'
                   }}>
                     The journey continues...
                   </p>
+                  {totalPages > 1 && (
+                    <p style={{ 
+                      color: '#475569', 
+                      fontSize: '0.7rem',
+                      opacity: 0.7,
+                      margin: 0
+                    }}>
+                      Use ← → arrow keys to navigate
+                    </p>
+                  )}
                 </motion.div>
               </div>
             </div>
