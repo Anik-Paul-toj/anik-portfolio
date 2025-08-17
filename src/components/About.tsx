@@ -39,8 +39,8 @@ const About: React.FC = () => {
   const experiences = [
     {
       title: 'Secondary',
-      company: 'Ramakrishna Vivekananda Mission Vidyabhavan',
-      period: 'Jan 2011 - June 2021',
+      company: 'Habra Hish School',
+      period: 'Jan 2009 - June 2019',
       description: 'Successfully completed 10 years of schooling with a strong academic record and active participation in school activities.',
       achievements: [
         'Honored with multiple accolades for academic and extracurricular achievements during schooling.',
@@ -50,8 +50,8 @@ const About: React.FC = () => {
     },
     {
       title: 'Higher Secondary',
-      company: 'Baranagore Ramakrishna Mission Ashrama High School',
-      period: 'Aug 2021 - Feb 2023',
+      company: 'Habra Hish School',
+      period: 'Aug 2019- Feb 2021',
       description: 'Completed higher secondary education with focus on Science stream.',
       achievements: [
         'Specialized in Computer Science and Mathematics.',
@@ -60,10 +60,10 @@ const About: React.FC = () => {
       ]
     },
     {
-      title: 'Bachelor of Computer Applications',
-      company: 'University College of Science, Technology & Agriculture',
+      title: 'Computer Science Engineering',
+      company: 'B P Poddar Institute of Management and Technology',
       period: '2023 - Present',
-      description: 'Currently pursuing BCA with specialization in software development and programming.',
+      description: 'Currently pursuing BTech with specialization in software development and programming.',
       achievements: [
         'Maintaining excellent academic performance.',
         'Active participant in coding clubs and tech events.',
