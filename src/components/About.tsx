@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaDownload, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaDownload, FaMapMarkerAlt, FaGraduationCap, FaSchool, FaUniversity } from 'react-icons/fa';
 import './styles/About.css';
 
 const TECH_ICON_MAP: Record<string, string> = {
@@ -40,52 +40,61 @@ const About: React.FC = () => {
     {
       title: 'Secondary',
       company: 'Habra Hish School',
-      period: 'Jan 2009 - June 2019',
+      period: '2009 - 2019',
+      year: '2019',
       description: 'Successfully completed 10 years of schooling with a strong academic record and active participation in school activities.',
       achievements: [
         'Honored with multiple accolades for academic and extracurricular achievements during schooling.',
         'Received the Governor\'s Award for exceptional performance in Class VII.',
         'Consistently maintained excellent academic performance, achieving 90.1% in Class 10 Board Examinations.'
-      ]
+      ],
+      icon: FaSchool,
+      color: '#FF6B6B'
     },
     {
       title: 'Higher Secondary',
       company: 'Habra Hish School',
-      period: 'Aug 2019- Feb 2021',
+      period: '2019 - 2021',
+      year: '2021',
       description: 'Completed higher secondary education with focus on Science stream.',
       achievements: [
         'Specialized in Computer Science and Mathematics.',
         'Achieved outstanding results in board examinations.',
         'Participated in various coding competitions and science fairs.'
-      ]
+      ],
+      icon: FaGraduationCap,
+      color: '#4ECDC4'
     },
     {
       title: 'Computer Science Engineering',
       company: 'B P Poddar Institute of Management and Technology',
       period: '2023 - Present',
+      year: '2027',
       description: 'Currently pursuing BTech with specialization in software development and programming.',
       achievements: [
         'Maintaining excellent academic performance.',
         'Active participant in coding clubs and tech events.',
         'Working on various software development projects.'
-      ]
+      ],
+      icon: FaUniversity,
+      color: '#45B7D1'
     }
   ];
 
   return (
     <section id="about" className="about" style={{ 
-      minHeight: '90vh', /* Reduced from 100vh */
+      minHeight: '90vh',
       width: '100%',
       display: 'flex', 
       alignItems: 'center', 
       justifyContent: 'center', 
-      padding: '1.5rem 0 0.5rem 0', /* Reduced top padding, minimized bottom padding */
+      padding: '1.5rem 0 0.5rem 0',
       margin: 0,
       position: 'relative',
       background: 'linear-gradient(135deg, rgba(15, 23, 42, 1) 0%, rgba(30, 41, 59, 0.95) 50%, rgba(15, 23, 42, 1) 100%)',
       overflow: 'hidden'
     }}>
-      {/* Subtle animated background pattern */}
+      {/* Cosmic background with stars */}
       <div style={{
         position: 'absolute',
         top: 0,
@@ -95,7 +104,8 @@ const About: React.FC = () => {
         background: `
           radial-gradient(circle at 20% 20%, rgba(95, 95, 255, 0.1) 0%, transparent 50%),
           radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
-          radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.06) 0%, transparent 50%)
+          radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="rgba(255,255,255,0.3)"/><circle cx="80" cy="40" r="0.3" fill="rgba(255,255,255,0.2)"/><circle cx="40" cy="80" r="0.4" fill="rgba(255,255,255,0.25)"/><circle cx="90" cy="90" r="0.2" fill="rgba(255,255,255,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>')
         `,
         animation: 'pulse 8s ease-in-out infinite alternate',
         zIndex: 1
@@ -123,7 +133,7 @@ const About: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          style={{ marginBottom: '2rem' }} /* Reduced margin */
+          style={{ marginBottom: '2rem' }}
         >
           <h2 style={{ fontSize: '2.2rem', marginBottom: '0.3rem' }}>About Me</h2>
           <p style={{ fontSize: '1rem' }}>Get to know me better</p>
@@ -181,7 +191,7 @@ const About: React.FC = () => {
               display: 'grid', 
               gridTemplateColumns: 'repeat(3, 1fr)', 
               gap: '1.2rem',
-              margin: '1.2rem 0' /* Reduced from 2rem */
+              margin: '1.2rem 0'
             }}>
               <div className="stat" style={{ textAlign: 'center' }}>
                 <h4 style={{ fontSize: '1.8rem', margin: '0 0 0.2rem 0', color: '#00bcd4' }}>5+</h4>
@@ -203,9 +213,9 @@ const About: React.FC = () => {
               gap: '0.5rem',
               background: 'linear-gradient(135deg, #5f5fff 0%, #00bcd4 100%)',
               color: '#fff',
-              padding: '0.6rem 1.2rem', /* Smaller padding */
+              padding: '0.6rem 1.2rem',
               borderRadius: '0.5rem',
-              fontSize: '0.9rem', /* Smaller font */
+              fontSize: '0.9rem',
               fontWeight: '600',
               textDecoration: 'none',
               border: 'none',
@@ -227,43 +237,60 @@ const About: React.FC = () => {
             <div className="experience-section">
               <h3 style={{textAlign: 'center', marginBottom: 0, letterSpacing: 1, color: '#b3b3ff', fontSize: '0.8rem'}}>WHAT I HAVE DONE SO FAR</h3>
               <h2 style={{textAlign: 'center', fontWeight: 700, fontSize: '1.8rem', margin: '0 0 1.5rem 0', color: '#fff', textShadow: '0 4px 32px #000'}}>Scholastic Record</h2>
-              <div className="timeline" style={{ position: 'relative', maxWidth: '900px', margin: '0 auto' }}>
-                {/* Single Vertical line */}
+              
+              {/* Marvel-inspired Timeline */}
+              <div className="marvel-timeline" style={{
+                position: 'relative',
+                maxWidth: '1200px',
+                margin: '0 auto',
+                padding: '2rem 0',
+                overflow: 'hidden'
+              }}>
+                {/* Timeline line */}
                 <div style={{
                   position: 'absolute',
-                  left: '50%',
-                  top: 0,
-                  bottom: 0,
-                  width: '2px', /* Thinner line */
-                  background: '#5f5fff',
-                  transform: 'translateX(-50%)',
-                  zIndex: 1
-                }}></div>
+                  top: '50%',
+                  left: '0',
+                  right: '0',
+                  height: '3px',
+                  background: 'linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4)',
+                  transform: 'translateY(-50%)',
+                  zIndex: 1,
+                  borderRadius: '2px',
+                  boxShadow: '0 0 20px rgba(255, 107, 107, 0.3)'
+                }} />
                 
-                {experiences.map((exp, index) => {
-                  const isLeft = index % 2 === 0;
-                  return (
+                {/* Timeline items */}
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  position: 'relative',
+                  zIndex: 2,
+                  padding: '0 1rem'
+                }}>
+                  {experiences.map((exp, index) => (
                     <motion.div
                       key={index}
                       className="timeline-item"
                       initial={{ 
                         opacity: 0, 
-                        x: isLeft ? -200 : 200,
+                        y: 100,
                         scale: 0.8
                       }}
                       whileInView={{ 
                         opacity: 1, 
-                        x: 0,
+                        y: 0,
                         scale: 1
                       }}
                       whileHover={{
-                        scale: 1.05,
-                        y: -10,
+                        scale: 1.1,
+                        y: -20,
                         transition: { duration: 0.3, ease: "easeOut" }
                       }}
                       transition={{ 
                         duration: 1.2, 
-                        delay: 0.1 + index * 0.3,
+                        delay: 0.1 + index * 0.2,
                         type: "spring",
                         damping: 15,
                         stiffness: 100
@@ -271,50 +298,60 @@ const About: React.FC = () => {
                       viewport={{ once: true, margin: "-100px" }}
                       style={{
                         display: 'flex',
-                        justifyContent: isLeft ? 'flex-start' : 'flex-end',
+                        flexDirection: 'column',
                         alignItems: 'center',
-                        marginBottom: '2rem', /* Reduced from 4rem */
                         position: 'relative',
-                        width: '100%',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        minWidth: '200px'
                       }}
                     >
-                      {/* Timeline dot centered on the line */}
-                      <div style={{
-                        position: 'absolute',
-                        left: '50%',
-                        top: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '30px', /* Reduced from 50px */
-                        height: '30px', /* Reduced from 50px */
-                        borderRadius: '50%',
-                        background: '#fff',
-                        border: '2px solid #5f5fff', /* Reduced from 3px */
-                        zIndex: 3,
-                        boxShadow: '0 0 15px rgba(95,95,255,0.5)', /* Reduced shadow */
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}>
-                      </div>
+                      {/* Timeline dot */}
+                      <motion.div
+                        whileHover={{ scale: 1.3 }}
+                        style={{
+                          width: '60px',
+                          height: '60px',
+                          borderRadius: '50%',
+                          background: exp.color,
+                          border: '4px solid #fff',
+                          boxShadow: `0 0 30px ${exp.color}80`,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginBottom: '1rem',
+                          zIndex: 3,
+                          position: 'relative'
+                        }}
+                      >
+                        {React.createElement(exp.icon as any, { 
+                          style: { 
+                            color: '#fff', 
+                            fontSize: '1.5rem',
+                            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+                          } 
+                        })}
+                      </motion.div>
+
+                      {/* Content card */}
                       <motion.div 
                         className="timeline-content"
                         whileHover={{
-                          boxShadow: '0 20px 50px rgba(95,95,255,0.3)',
-                          borderColor: '#5f5fff',
+                          boxShadow: `0 20px 50px ${exp.color}40`,
+                          borderColor: exp.color,
                           transition: { duration: 0.3 }
                         }}
                         style={{
-                          width: '43%', /* Slightly narrower */
-                          background: 'rgba(24,27,43,0.95)',
-                          padding: '1.5rem', /* Reduced from 2.5rem */
-                          borderRadius: '1rem', /* Reduced from 1.5rem */
-                          border: '1px solid #5f5fff22',
-                          boxShadow: '0 8px 25px rgba(95,95,255,0.15)', /* Reduced shadow */
+                          background: 'rgba(15, 23, 42, 0.95)',
+                          padding: '1.5rem',
+                          borderRadius: '1rem',
+                          border: `2px solid ${exp.color}40`,
+                          boxShadow: `0 8px 25px ${exp.color}20`,
                           backdropFilter: 'blur(15px)',
-                          textAlign: isLeft ? 'right' : 'left',
+                          textAlign: 'center',
                           position: 'relative',
-                          overflow: 'hidden'
+                          overflow: 'hidden',
+                          minWidth: '200px',
+                          maxWidth: '250px'
                         }}
                       >
                         {/* Animated background gradient */}
@@ -328,22 +365,33 @@ const About: React.FC = () => {
                             left: 0,
                             right: 0,
                             bottom: 0,
-                            background: 'linear-gradient(135deg, rgba(95,95,255,0.1) 0%, rgba(0,188,212,0.1) 100%)',
-                            borderRadius: '1.5rem',
+                            background: `linear-gradient(135deg, ${exp.color}10 0%, transparent 100%)`,
+                            borderRadius: '1rem',
                             zIndex: 0
                           }}
                         />
                         
                         <div style={{ position: 'relative', zIndex: 1 }}>
                           <motion.h4 
-                            whileHover={{ color: '#00ffff' }}
-                            style={{ color: '#00bcd4', marginBottom: '0.3rem', fontSize: '1.1rem', fontWeight: '700' }}
+                            whileHover={{ color: exp.color }}
+                            style={{ 
+                              color: exp.color, 
+                              marginBottom: '0.5rem', 
+                              fontSize: '1.1rem', 
+                              fontWeight: '700',
+                              textShadow: `0 2px 8px ${exp.color}40`
+                            }}
                           >
                             {exp.title}
                           </motion.h4>
                           <motion.h5 
                             whileHover={{ color: '#8f8fff' }}
-                            style={{ color: '#5f5fff', marginBottom: '0.6rem', fontSize: '0.9rem' }}
+                            style={{ 
+                              color: '#5f5fff', 
+                              marginBottom: '0.6rem', 
+                              fontSize: '0.9rem',
+                              fontWeight: '600'
+                            }}
                           >
                             {exp.company}
                           </motion.h5>
@@ -351,24 +399,53 @@ const About: React.FC = () => {
                             className="period"
                             whileHover={{ scale: 1.05 }}
                             style={{ 
-                              background: 'rgba(95,95,255,0.3)', 
-                              padding: '0.3rem 0.8rem', 
-                              borderRadius: '1.5rem',
-                              fontSize: '0.75rem',
-                              color: '#e0e0ff',
+                              background: `${exp.color}30`, 
+                              padding: '0.4rem 1rem', 
+                              borderRadius: '2rem',
+                              fontSize: '0.8rem',
+                              color: '#fff',
                               display: 'inline-block',
-                              fontWeight: '500'
+                              fontWeight: '600',
+                              marginBottom: '0.8rem',
+                              border: `1px solid ${exp.color}60`
                             }}
                           >
                             {exp.period}
                           </motion.span>
-                          <p style={{ marginTop: '0.8rem', color: '#ddd', lineHeight: '1.4', fontSize: '0.85rem', marginBottom: '0.6rem' }}>
+                          <p style={{ 
+                            color: '#ddd', 
+                            lineHeight: '1.4', 
+                            fontSize: '0.85rem', 
+                            marginBottom: '0.8rem',
+                            textAlign: 'left'
+                          }}>
                             {exp.description}
                           </p>
                           {exp.achievements && (
-                            <ul style={{ color: '#ccc', lineHeight: '1.3', paddingLeft: isLeft ? '0' : '0', paddingRight: isLeft ? '0' : '0', listStyle: 'none', margin: 0 }}>
-                              {exp.achievements.map((achievement, i) => (
-                                <li key={i} style={{ marginBottom: '0.3rem', position: 'relative', paddingLeft: '0', paddingRight: '0', fontSize: '0.8rem' }}>
+                            <ul style={{ 
+                              color: '#ccc', 
+                              lineHeight: '1.3', 
+                              paddingLeft: '0', 
+                              listStyle: 'none', 
+                              margin: 0,
+                              textAlign: 'left'
+                            }}>
+                              {exp.achievements.slice(0, 2).map((achievement, i) => (
+                                <li key={i} style={{ 
+                                  marginBottom: '0.4rem', 
+                                  position: 'relative', 
+                                  fontSize: '0.8rem',
+                                  paddingLeft: '1rem'
+                                }}>
+                                  <span style={{
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: '0.3rem',
+                                    width: '4px',
+                                    height: '4px',
+                                    borderRadius: '50%',
+                                    background: exp.color
+                                  }}></span>
                                   {achievement}
                                 </li>
                               ))}
@@ -376,9 +453,28 @@ const About: React.FC = () => {
                           )}
                         </div>
                       </motion.div>
+
+                      {/* Year label */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
+                        style={{
+                          marginTop: '1rem',
+                          padding: '0.5rem 1rem',
+                          background: exp.color,
+                          borderRadius: '1rem',
+                          color: '#fff',
+                          fontSize: '0.9rem',
+                          fontWeight: '700',
+                          boxShadow: `0 4px 15px ${exp.color}40`
+                        }}
+                      >
+                        {exp.year}
+                      </motion.div>
                     </motion.div>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -399,38 +495,38 @@ const About: React.FC = () => {
                 flexWrap: 'wrap',
                 justifyContent: 'center',
                 alignItems: 'center',
-                gap: '1.5rem', /* Reduced from 2.5rem */
-                marginTop: 20, /* Reduced from 40 */
-                borderRadius: '1.5rem', /* Reduced from 2rem */
-                padding: '1.5rem 1rem', /* Reduced from 2.5rem 2rem */
+                gap: '1.5rem',
+                marginTop: 20,
+                borderRadius: '1.5rem',
+                padding: '1.5rem 1rem',
                 position: 'relative',
                 zIndex: 2,
                 border: 'none',
                 backdropFilter: 'none',
                 width: '100%',
                 maxWidth: 900,
-                minHeight: 180, /* Reduced from 220 */
+                minHeight: 180,
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                marginBottom: '2rem' /* Added bottom margin */
+                marginBottom: '2rem'
               }}>
                 {technologies.map((tech) => (
-                  <div key={tech} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 70}}> {/* Reduced from 90 */}
+                  <div key={tech} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 70}}>
                     <div style={{
                       background: 'rgba(20,22,40,0.95)',
                       borderRadius: '50%',
-                      padding: 14, /* Reduced from 18 */
-                      boxShadow: '0 0 12px 2px #5f5fff44', /* Reduced shadow */
-                      marginBottom: 6, /* Reduced from 8 */
+                      padding: 14,
+                      boxShadow: '0 0 12px 2px #5f5fff44',
+                      marginBottom: 6,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      border: '1.5px solid #23244d', /* Thinner border */
+                      border: '1.5px solid #23244d',
                       transition: 'transform 0.2s',
                     }}>
-                      <img src={TECH_ICON_MAP[tech] || TECH_ICON_MAP['React']} alt={tech} style={{width: 36, height: 36, filter: 'brightness(1.2) drop-shadow(0 2px 8px #5f5fff44)'}} /> {/* Reduced from 44x44 */}
+                      <img src={TECH_ICON_MAP[tech] || TECH_ICON_MAP['React']} alt={tech} style={{width: 36, height: 36, filter: 'brightness(1.2) drop-shadow(0 2px 8px #5f5fff44)'}} />
                     </div>
-                    <span style={{color: '#fff', fontWeight: 600, fontSize: 14, textShadow: '0 2px 8px #000'}}> {tech} </span> {/* Reduced font size */}
+                    <span style={{color: '#fff', fontWeight: 600, fontSize: 14, textShadow: '0 2px 8px #000'}}> {tech} </span>
                   </div>
                 ))}
               </div>

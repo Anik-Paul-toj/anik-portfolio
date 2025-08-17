@@ -174,24 +174,41 @@
 }
 
 .scroll-arrow {
-  width: 30px;
-  height: 30px;
-  border: 2px solid white;
-  border-top: none;
-  border-left: none;
-  transform: rotate(45deg);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
   animation: bounce 2s infinite;
+}
+
+.scroll-arrow:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.scroll-arrow svg {
+  transition: transform 0.3s ease;
+}
+
+.scroll-arrow:hover svg {
+  transform: translateY(2px);
 }
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0) rotate(45deg);
+    transform: translateY(0);
   }
   40% {
-    transform: translateY(-10px) rotate(45deg);
+    transform: translateY(-8px);
   }
   60% {
-    transform: translateY(-5px) rotate(45deg);
+    transform: translateY(-4px);
   }
 }
 

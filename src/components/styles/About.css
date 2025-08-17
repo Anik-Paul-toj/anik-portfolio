@@ -252,3 +252,72 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Marvel Timeline Responsive Styles */
+@media (max-width: 768px) {
+  .marvel-timeline {
+    padding: 1rem 0 !important;
+  }
+  
+  .marvel-timeline > div {
+    flex-direction: column !important;
+    gap: 2rem !important;
+    padding: 0 0.5rem !important;
+  }
+  
+  .marvel-timeline > div > div {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .marvel-timeline > div > div > div:first-child {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .marvel-timeline > div > div > div:nth-child(2) {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Hide the horizontal line on mobile */
+  .marvel-timeline > div:first-child {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .marvel-timeline > div > div > div:first-child {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .marvel-timeline > div > div > div:first-child svg {
+    font-size: 1.2rem !important;
+  }
+  
+  .marvel-timeline > div > div > div:nth-child(2) {
+    padding: 1rem !important;
+  }
+  
+  .marvel-timeline > div > div > div:nth-child(2) h4 {
+    font-size: 1rem !important;
+  }
+  
+  .marvel-timeline > div > div > div:nth-child(2) h5 {
+    font-size: 0.8rem !important;
+  }
+  
+  .marvel-timeline > div > div > div:nth-child(2) p {
+    font-size: 0.8rem !important;
+  }
+  
+  .marvel-timeline > div > div > div:nth-child(2) ul li {
+    font-size: 0.75rem !important;
+  }
+  
+  .marvel-timeline > div > div > div:last-child {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.8rem !important;
+  }
+}
